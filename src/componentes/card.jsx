@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 function Card(props) {
 	const cardStyle = {
-		border: '5px solid #333',
-		borderRadius: '4px',
-		backgroundColor: '#add8e6',
-		boxShadow: '0 2px 4px rgba(0, 100, 100)',
-		height: '800px',
+		border: '10px solid ',
+		borderRadius: '78px',
+		backgroundColor: '#daddda',
+		boxShadow: '10 22px 470px rgba(0,0,0)',
+		height: '600px',
 		width: '500px',
 		textAlign: 'center',
 		margin: '16px',
@@ -15,8 +15,8 @@ function Card(props) {
 	};
 
 	const imageStyle = {
-		width: '500px',
-		height: '400px',
+		width: '220px',
+		height: '150px',
 	};
 
 	const textContainerStyle = {
@@ -26,21 +26,22 @@ function Card(props) {
 	};
 
 	const titleStyle = {
-		fontSize: '24px',
+		fontSize: '50px',
 	};
 
 	const botonLike = {
-		backgroundColor: 'black',
-		color: "#fff",
-		fontSize: '24px',
+		backgroundColor: '#adf7df',
+		color: "#000",
+		fontSize: '29px',
 		cursor: "pointer",
-		borderRadius: "5px",
+		borderRadius: "15px",
 		boxShadow: '2px 2px 5px rgba(4, 93, 93)',
 		margin: "2px",
+		padding: "7px"
 	}
 
 	const likesStyle = {
-		fontSize: '24px',
+		fontSize: '40px',
 	}
 
 	const [likes, setLikes] = useState(0);
@@ -52,7 +53,7 @@ function Card(props) {
 				<p>{props.description}</p>
 			</div>
 			<img src={props.imageUrl} style={imageStyle} alt="Card" />
-			<h4 style={likesStyle}>Likes: {likes}</h4>
+			<h4 style={likesStyle}>♥ {likes}</h4>
 			<button
 				style={botonLike}
 				onClick={() => setLikes(likes + 1)}
