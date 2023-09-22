@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import estilo from '../esrilos/estilo.css'
 
 function Card(props) {
 	const cardStyle = {
@@ -16,8 +17,10 @@ function Card(props) {
 
 	const imageStyle = {
 		width: '220px',
-		height: '150px',
+		height: '130px',
 	};
+	
+	
 
 	const textContainerStyle = {
 		padding: '16px',
@@ -25,8 +28,14 @@ function Card(props) {
 		fontSize: '20px',
 	};
 
+	const tripStyle = {
+	    margin: '0px',
+		textAlign: 'justify',
+		fontSize: '25px'
+	}
 	const titleStyle = {
 		fontSize: '50px',
+		textAlign: 'justify'
 	};
 
 	const botonLike = {
@@ -39,6 +48,24 @@ function Card(props) {
 		margin: "2px",
 		padding: "7px"
 	}
+	
+
+	const cardContent = {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'justify',
+	  };
+	
+	  const tt = {
+		display: 'flex',
+		flexDirection: 'column',
+
+	  };
+	
+	  const buttonsContent = {
+		display: 'flex',
+		gap: '16px', // Espacio entre los botones
+	  };
 
 	const likesStyle = {
 		fontSize: '40px',
@@ -48,24 +75,32 @@ function Card(props) {
 
 	return (
 		<div style={cardStyle} className="card">
+			<div style={cardContent}>
+			<div style={tt}>
 			<h2 style={titleStyle}>{props.title}</h2>
-			<div style={textContainerStyle}>
-				<p>{props.description}</p>
+			<h5 style={tripStyle}>Tripulación: {props.tripulacion}</h5>
 			</div>
-			<img src={props.imageUrl} style={imageStyle} alt="Card" />
-			<h4 style={likesStyle}>♥ {likes}</h4>
+			<div style={buttonsContent}>
 			<button
 				style={botonLike}
 				onClick={() => setLikes(likes + 1)}
 			>
-				Incrementar Like
+				Like
 			</button>
 			<button
 				style={botonLike}
 				onClick={() => props.eliminarCarta(props.id)}
 			>
-				Eliminar
+				Delete
 			</button>
+			</div>
+			</div>
+			<div style={textContainerStyle}>
+				<p>{props.description}</p>
+			</div>
+			<img src={props.imageUrl} style={imageStyle} alt="Card" />
+			<h4 style={likesStyle}>♥ {likes}</h4>
+
 		</div>
 	);
 }
