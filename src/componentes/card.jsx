@@ -39,6 +39,7 @@ function Card(props) {
 	};
 
 	const botonLike = {
+		height: '60px',
 		backgroundColor: '#adf7df',
 		color: "#000",
 		fontSize: '29px',
@@ -46,6 +47,7 @@ function Card(props) {
 		borderRadius: "15px",
 		boxShadow: '2px 2px 5px rgba(4, 93, 93)',
 		margin: "2px",
+		marginTop: '80px',
 		padding: "7px"
 	}
 	
