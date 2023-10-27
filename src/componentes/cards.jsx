@@ -87,7 +87,7 @@ function Cards() {
     <div style={cardGridStyle}>
       {onePieceCharacters.map((character) => (
         <Card
-          key={character.title}
+          key={character.id}
           title={character.title}
           description={character.description}
           id={character.id}

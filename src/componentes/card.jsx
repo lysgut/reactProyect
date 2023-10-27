@@ -101,7 +101,7 @@ function Card(props) {
 				<p>{props.description}</p>
 			</div>
 			<img src={props.imageUrl} style={imageStyle} alt="Card" />
-			<h4 style={likesStyle}>♥ {likes}</h4>
+			<h4 style={likesStyle} 	onClick={() => setLikes(likes + 1)}>  ♥  {likes}</h4>
 
 		</div>
 	);
