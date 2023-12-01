@@ -1,7 +1,12 @@
-import { useState } from 'react';
-import estilo from '../esrilos/estilo.css'
+import React, { useState } from 'react';
 
 function Card(props) {
+	const [likes, setLikes] = useState(0);
+
+	const handleLike = () => {
+		setLikes(likes + 1);
+	};
+
 	const cardStyle = {
 		border: '10px solid ',
 		borderRadius: '78px',
@@ -10,17 +15,14 @@ function Card(props) {
 		height: '600px',
 		width: '500px',
 		textAlign: 'center',
-		margin: '16px',
+		margin: '16px',	
 		padding: '16px',
-
 	};
 
 	const imageStyle = {
 		width: '220px',
 		height: '130px',
 	};
-	
-	
 
 	const textContainerStyle = {
 		padding: '16px',
@@ -29,80 +31,73 @@ function Card(props) {
 	};
 
 	const tripStyle = {
-	    margin: '0px',
+		margin: '0px',
 		textAlign: 'justify',
 		fontSize: '25px'
-	}
+	};
+
 	const titleStyle = {
 		fontSize: '50px',
 		textAlign: 'justify'
 	};
 
-	const botonLike = {
+	const botonDelete = {
+		position: 'absolute',
+		top: '10px', 
+		right: '10px', 
 		height: '60px',
-		backgroundColor: '#adf7df',
-		color: "#000",
+		backgroundColor: '#FF0000',
+		color: "#FFF",
 		fontSize: '29px',
 		cursor: "pointer",
 		borderRadius: "15px",
 		boxShadow: '2px 2px 5px rgba(4, 93, 93)',
 		margin: "2px",
-		marginTop: '80px',
 		padding: "7px"
-	}
-	
+	};
 
 	const cardContent = {
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'justify',
-	  };
-	
-	  const tt = {
+		position: 'relative'
+	};
+
+	const tt = {
 		display: 'flex',
 		flexDirection: 'column',
+	};
 
-	  };
-	
-	  const buttonsContent = {
+	const buttonsContent = {
 		display: 'flex',
-		gap: '16px', // Espacio entre los botones
-	  };
+		gap: '16px',
+	};
 
 	const likesStyle = {
 		fontSize: '40px',
-	}
-
-	const [likes, setLikes] = useState(0);
+	};
 
 	return (
 		<div style={cardStyle} className="card">
 			<div style={cardContent}>
-			<div style={tt}>
-			<h2 style={titleStyle}>{props.title}</h2>
-			<h5 style={tripStyle}>Tripulación: {props.tripulacion}</h5>
-			</div>
-			<div style={buttonsContent}>
-			<button
-				style={botonLike}
-				onClick={() => setLikes(likes + 1)}
-			>
-				Like
-			</button>
-			<button
-				style={botonLike}
-				onClick={() => props.eliminarCarta(props.id)}
-			>
-				Delete
-			</button>
-			</div>
+				<div style={tt}>
+					<h2 style={titleStyle}>{props.title}</h2>
+					<h5 style={tripStyle}>Tripulación: {props.tripulacion}</h5>
+				</div>
+				<div style={buttonsContent}>
+					<button
+						style={botonDelete}
+						onClick={() => props.eliminarCarta(props.id)}
+					>
+						X
+					</button>
+				</div>
 			</div>
 			<div style={textContainerStyle}>
 				<p>{props.description}</p>
 			</div>
 			<img src={props.imageUrl} style={imageStyle} alt="Card" />
-			<h4 style={likesStyle} onClick={() => setLikes(likes + 1)}>  ♥  {likes}</h4>
-
+			<h4 style={likesStyle} onClick={handleLike}> ♥ {likes}</h4>
 		</div>
 	);
 }

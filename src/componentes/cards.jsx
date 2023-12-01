@@ -1,8 +1,10 @@
 
 import React, { useState } from 'react';
 import Card from './card';
+import { useFormContext } from './FormContext';
 
 function Cards() {
+  const { isFormOpen, setIsFormOpen } = useFormContext();
   const [onePieceCharacters, setOnePieceCharacters] = useState([
     {
       title: 'Luffy',
@@ -70,6 +72,23 @@ function Cards() {
     },
   ]);
 
+  const openForm = () => {
+    setIsFormOpen(true);
+  };
+
+  const closeForm = () => {
+    setIsFormOpen(false);
+  };
+
+  const createNewCard = (newCardData) => {
+    const newCard = {
+      title: newCardData.title,
+      description: newCardData.description,
+      imageUrl: newCardData.imageUrl,
+      id: onePieceCharacters.length + 1, // Asignar un ID único
+      tripulacion: newCardData.tripulacion || 'Mugiwara' // Por defecto, si no se proporciona tripulación
+    };
+    
   const cardGridStyle = {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
@@ -83,21 +102,50 @@ function Cards() {
     setOnePieceCharacters(updatedCharacters);
   };
 
-  return (
-    <div style={cardGridStyle}>
-      {onePieceCharacters.map((character) => (
-        <Card
-          key={character.id}
-          title={character.title}
-          description={character.description}
-          id={character.id}
-          tripulacion={character.tripulacion}
-          imageUrl={character.imageUrl}
-          eliminarCarta={deleteCard}
-        />
-      ))}
-    </div>
-  );
-}
+  setOnePieceCharacters([...onePieceCharacters, newCard]);
+  setIsFormOpen(false); // Cerrar el formulario después de agregar la tarjeta
+};
+
+return (
+  <div className="card-grid">
+    {isFormOpen && (
+      <div className="form-container">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const newCardData = {
+              title: formData.get('title'),
+              description: formData.get('description'),
+              imageUrl: formData.get('imageUrl'),
+              tripulacion: formData.get('tripulacion')
+            };
+            createNewCard(newCardData);
+          }}
+        >
+          <input type="text" name="title" placeholder="Título" />
+          <textarea name="description" placeholder="Descripción" />
+          <input type="text" name="imageUrl" placeholder="URL de la imagen" />
+          <input type="text" name="tripulacion" placeholder="Tripulación" />
+          <button type="submit">Crear Tarjeta</button>
+          <button type="button" onClick={closeForm}>Cancelar</button>
+        </form>
+      </div>
+    )}
+
+    {onePieceCharacters.map((character) => (
+      <Card
+        key={character.id}
+        title={character.title}
+        description={character.description}
+        id={character.id}
+        tripulacion={character.tripulacion}
+        imageUrl={character.imageUrl}
+        eliminarCarta={deleteCard}
+      />
+    ))}
+  </div>
+);
+};
 
 export default Cards;
